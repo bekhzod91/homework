@@ -6,18 +6,18 @@ import (
 )
 
 type ResponseError struct {
-	Detail string `json:"detail"`
+	Detail string `json:"Detail"`
 }
 
 type UserDataResponse struct {
-	Id int `json:"id"`
-	Email string `json:"email"`
-	FirstName string `json:"firstName"`
-	SecondName string `json:"secondName"`
+	Id int `json:"Id"`
+	Email string `json:"Email"`
+	FirstName string `json:"FirstName"`
+	SecondName string `json:"SecondName"`
 }
 
 type UserListResponse struct {
-	Count int `json:"count"`
+	Count int `json:"Count"`
 	Data []UserDataResponse `json:"data"`
 }
 
@@ -27,10 +27,10 @@ type UserDetailResponse struct {
 
 type CreateOrUpdateError struct {
 	Errors struct {
-		Email string `json:"email"`
-		FirstName string `json:"firstName"`
-		SecondName string `json:"secondName"`
-	} `json:"errors"`
+		Email string `json:"Email"`
+		FirstName string `json:"FirstName"`
+		SecondName string `json:"SecondName"`
+	} `json:"Errors"`
 }
 
 

@@ -11,9 +11,9 @@ import (
 type UserController struct {}
 
 type RequestUserData struct {
-	Email string `json:"email"`
-	FirstName string `json:"firstName"`
-	SecondName string `json:"secondName"`
+	Email string `json:"Email"`
+	FirstName string `json:"FirstName"`
+	SecondName string `json:"SecondName"`
 }
 
 func (ctrl UserController) list (c *gin.Context) {
@@ -28,8 +28,8 @@ func (ctrl UserController) list (c *gin.Context) {
 	count, _ := qs.Count()
 
 	c.JSON(http.StatusOK, gin.H{
-		"count": count,
-		"data": &users,
+		"Count": count,
+		"Data": &users,
 	})
 }
 
@@ -39,7 +39,7 @@ func (ctrl UserController) detail (c *gin.Context) {
 
 	if errInt != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"detail": "Incorrect type. Expected pk value, received " + id + ".",
+			"Detail": "Incorrect type. Expected pk value, received " + id + ".",
 		})
 
 		return
@@ -51,7 +51,7 @@ func (ctrl UserController) detail (c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
-			"detail": "Invalid pk " + id + " - object does not exist.",
+			"Detail": "Invalid pk " + id + " - object does not exist.",
 		})
 
 		return
@@ -77,11 +77,11 @@ func (ctrl UserController) create (c *gin.Context) {
 		o.Insert(user)
 
 		c.JSON(http.StatusCreated, gin.H {
-			"data": user,
+			"Data": user,
 		})
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H {
-			"errors": errors,
+			"Errors": errors,
 		})
 	}
 }
@@ -92,7 +92,7 @@ func (ctrl UserController) update (c *gin.Context) {
 
 	if errInt != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"detail": "Incorrect type. Expected pk value, received " + id + ".",
+			"Detail": "Incorrect type. Expected pk value, received " + id + ".",
 		})
 
 		return
@@ -104,7 +104,7 @@ func (ctrl UserController) update (c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
-			"detail": "Invalid pk " + id + " - object does not exist.",
+			"Detail": "Invalid pk " + id + " - object does not exist.",
 		})
 
 		return
@@ -123,11 +123,11 @@ func (ctrl UserController) update (c *gin.Context) {
 		o.Update(&user)
 
 		c.JSON(http.StatusOK, gin.H{
-			"data": &user,
+			"Data": &user,
 		})
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H {
-			"errors": errors,
+			"Errors": errors,
 		})
 	}
 }
@@ -138,7 +138,7 @@ func (ctrl UserController) delete (c *gin.Context) {
 
 	if errInt != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"detail": "Incorrect type. Expected pk value, received " + id + ".",
+			"Detail": "Incorrect type. Expected pk value, received " + id + ".",
 		})
 
 		return

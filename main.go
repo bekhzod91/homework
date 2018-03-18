@@ -1,41 +1,49 @@
 package main
 
 import (
+	"net/http"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
+
 )
 
 func setupRouter() *gin.Engine {
-	routeRoot := gin.Default()
-	routeV1 := routeRoot.Group("/api/v1")
+	routerRoot := gin.Default()
+
+	routerRoot.Static("/doc", "./public")
+	routerRoot.GET("/", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/doc")
+	})
+
+	routerV1 := routerRoot.Group("/api/v1")
 
 	// User crud
-	routeUser := routeV1.Group("/user")
+	routerUser := routerV1.Group("/user")
 	{
 		userController := new(UserController)
 
 		// List
-		routeUser.GET("/", userController.list)
+		routerUser.GET("/", userController.list)
 
 		// Detail
-		routeUser.GET("/:id", userController.detail)
+		routerUser.GET("/:id/", userController.detail)
 
 		// Create
-		routeUser.POST("/", userController.create)
+		routerUser.POST("/", userController.create)
 
 		// Update
-		routeUser.PUT("/:id", userController.update)
+		routerUser.PUT("/:id/", userController.update)
 
 		// Delete
-		routeUser.DELETE("/:id", userController.delete)
+		routerUser.DELETE("/:id/", userController.delete)
 
 		// Browser cross request available
-		routeUser.OPTIONS("/*any", func(c *gin.Context) {
+		routerUser.OPTIONS("/*any", func(c *gin.Context) {
 
 		})
 	}
 
-	return routeRoot
+	return routerRoot
 }
 
 func main() {

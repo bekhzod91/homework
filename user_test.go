@@ -85,7 +85,7 @@ func TestUserListEmpty(t *testing.T) {
 func TestUserDetail(t *testing.T) {
 	client := initTest(t)
 
-	response := client.get("/api/v1/user/1")
+	response := client.get("/api/v1/user/1/")
 
 	responseData := new(UserDetailResponse)
 	json.Unmarshal([]byte(response.Body.String()), &responseData)
@@ -100,7 +100,7 @@ func TestUserDetail(t *testing.T) {
 func TestUserDetailNotFound(t *testing.T) {
 	client := initTest(t)
 
-	response := client.get("/api/v1/user/3")
+	response := client.get("/api/v1/user/3/")
 	assert.Equal(t, response.Code, http.StatusNotFound)
 }
 
@@ -160,7 +160,7 @@ func TestUserUpdateEmptyError(t *testing.T)  {
 	})
 	body := bytes.NewBuffer(request)
 
-	response := client.put("/api/v1/user/1", body)
+	response := client.put("/api/v1/user/1/", body)
 
 	responseData := new(CreateOrUpdateError)
 	json.Unmarshal([]byte(response.Body.String()), &responseData)
@@ -182,7 +182,7 @@ func TestUserUpdate(t *testing.T)  {
 	})
 	body := bytes.NewBuffer(request)
 
-	response := client.put("/api/v1/user/1", body)
+	response := client.put("/api/v1/user/1/", body)
 
 	o := orm.NewOrm()
 	user := Users{ Id: 1 }
@@ -200,7 +200,7 @@ func TestUserUpdateNotFound(t *testing.T) {
 	request, _ := json.Marshal(&UserDataResponse{})
 	body := bytes.NewBuffer(request)
 
-	response := client.put("/api/v1/user/10", body)
+	response := client.put("/api/v1/user/10/", body)
 
 	responseData := new(ResponseError)
 	json.Unmarshal([]byte(response.Body.String()), &responseData)
@@ -215,7 +215,7 @@ func TestUserUpdateWrongUrl(t *testing.T) {
 	request, _ := json.Marshal(&UserDataResponse{})
 	body := bytes.NewBuffer(request)
 
-	response := client.put("/api/v1/user/a10", body)
+	response := client.put("/api/v1/user/a10/", body)
 
 	responseData := new(ResponseError)
 	json.Unmarshal([]byte(response.Body.String()), &responseData)
@@ -227,7 +227,7 @@ func TestUserUpdateWrongUrl(t *testing.T) {
 func TestUserDelete(t *testing.T) {
 	client := initTest(t)
 
-	response := client.delete("/api/v1/user/1")
+	response := client.delete("/api/v1/user/1/")
 	assert.Equal(t, response.Code, http.StatusNoContent)
 
 	o := orm.NewOrm()
