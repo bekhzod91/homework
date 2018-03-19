@@ -1,5 +1,5 @@
 if [[ $1 = "build" ]]; then
-  go build -o homework main.go user_controller.go user_model.go utils.go form.go
+  go build -o homework main.go controller.go model.go utils.go form.go
 fi
 
 if [[ $1 = "test" ]]; then
@@ -7,5 +7,5 @@ if [[ $1 = "test" ]]; then
 fi
 
 if [[ $1 = "" ]]; then
-    go run main.go user_controller.go user_model.go utils.go form.go
+    go run main.go controller.go model.go utils.go form.go
 fi
