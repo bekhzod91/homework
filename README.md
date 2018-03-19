@@ -7,7 +7,7 @@ $ git clone https://github.com/myrubapa/homework .
 $ chmod +x ./run.sh
 ```
 
-### Install dependency
+### Install dependency very slow
 ```bash
 $ govendor sync
 ```
@@ -20,5 +20,5 @@ $ ./run.sh test
 ### Run project
 ```bash
 $ ./run.sh &
-chrome http://localhost:8080
+$ chrome http://localhost:8080
 ```
