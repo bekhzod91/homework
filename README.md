@@ -19,5 +19,6 @@ $ ./run.sh test
 
 ### Run project
 ```bash
-$ ./run.sh
+$ ./run.sh &
+chrome http://localhost:8080
 ```
